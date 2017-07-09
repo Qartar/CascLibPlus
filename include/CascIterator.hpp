@@ -17,6 +17,10 @@ using tstring = std::string;
 class CascStorage;
 class CascFindFiles;
 
+////////////////////////////////////////////////////////////////////////////////
+/**
+ *
+ */
 class CascIterator
 {
 public:
@@ -43,6 +47,10 @@ protected:
     CascIterator& operator=(CascIterator const&) = delete;
 };
 
+////////////////////////////////////////////////////////////////////////////////
+/**
+ *
+ */
 class CascFindFiles
 {
 public:

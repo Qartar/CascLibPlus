@@ -3,30 +3,6 @@
 
 #include "CascFile.hpp"
 
-namespace {
-
-unsigned char IntToHexChar[] = "0123456789abcdef";
-
-char * StringFromBinary(BYTE const* pbBinary, size_t cbBinary, char * szBuffer)
-{
-    char * szSaveBuffer = szBuffer;
-
-    // Convert the string to the array of MD5
-    // Copy the blob data as text
-    for(size_t i = 0; i < cbBinary; i++)
-    {
-        *szBuffer++ = IntToHexChar[pbBinary[0] >> 0x04];
-        *szBuffer++ = IntToHexChar[pbBinary[0] & 0x0F];
-        pbBinary++;
-    }
-
-    // Terminate the string
-    *szBuffer = 0;
-    return szSaveBuffer;
-}
-
-}
-
 //------------------------------------------------------------------------------
 CascFile::CascFile(HANDLE hFile)
     : _file(hFile)
@@ -86,9 +62,8 @@ CascFile::~CascFile()
 //------------------------------------------------------------------------------
 DWORD CascFile::Seek(LONGLONG FilePos, DWORD dwMoveMethod)
 {
-    LARGE_INTEGER li;
-    li.QuadPart = FilePos;
-    return CascSetFilePointer(_file, li.LowPart, &li.HighPart, dwMoveMethod);
+    LONG HighPart = FilePos >> 32;
+    return CascSetFilePointer(_file, FilePos & 0xffffffff, &HighPart, dwMoveMethod);
 }
 
 //------------------------------------------------------------------------------
@@ -116,6 +91,12 @@ DWORD CascFile::Locale() const
 }
 
 //------------------------------------------------------------------------------
+DWORD CascFile::DataId() const
+{
+    return _file ? _data.dwFileDataId : 0;
+}
+
+//------------------------------------------------------------------------------
 DWORD CascFile::Size() const
 {
     return _file ? _data.dwFileSize : 0;
@@ -124,7 +105,7 @@ DWORD CascFile::Size() const
 //------------------------------------------------------------------------------
 ULONGLONG CascFile::ActualSize() const
 {
-    LARGE_INTEGER li{0,0};
-    li.LowPart = CascGetFileSize(_file, (PDWORD)&li.HighPart);
-    return li.QuadPart;
+    DWORD HighPart = 0;
+    DWORD LowPart = CascGetFileSize(_file, &HighPart);
+    return (static_cast<ULONGLONG>(HighPart) << 32) | LowPart;
 }

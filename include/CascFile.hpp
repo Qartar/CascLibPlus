@@ -8,6 +8,10 @@
 class CascStorage;
 class CascIterator;
 
+////////////////////////////////////////////////////////////////////////////////
+/**
+ *
+ */
 class CascFile
 {
 public:
@@ -27,8 +31,11 @@ public:
     //! Return the base name of the file without relative path.
     char const* BaseName() const;
 
-    //! Return the locale flags.
+    //! Return the locale flags (WoW only).
     DWORD Locale() const;
+
+    //! Return the file data Id (Wow only).
+    DWORD DataId() const;
 
     //! Return the size of the file according to the file index.
     DWORD Size() const;
