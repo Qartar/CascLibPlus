@@ -4,6 +4,9 @@
 #include "CascFile.hpp"
 
 //------------------------------------------------------------------------------
+BYTE const DefaultEncodingKey[MD5_HASH_SIZE] = {};
+
+//------------------------------------------------------------------------------
 CascFile::CascFile(HANDLE hFile)
     : _file(hFile)
 {
@@ -82,6 +85,16 @@ char const* CascFile::Name() const
 char const* CascFile::BaseName() const
 {
     return _file ? _data.szPlainName : "";
+}
+
+//------------------------------------------------------------------------------
+CascFile::MD5_HASH const& CascFile::Hash() const
+{
+    if (_file) {
+        return _data.EncodingKey;
+    } else {
+        return DefaultEncodingKey;
+    }
 }
 
 //------------------------------------------------------------------------------

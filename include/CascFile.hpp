@@ -15,6 +15,9 @@ class CascIterator;
 class CascFile
 {
 public:
+    using MD5_HASH = BYTE[MD5_HASH_SIZE];
+
+public:
     CascFile(CascFile&&);
     CascFile& operator=(CascFile&&);
     ~CascFile();
@@ -30,6 +33,9 @@ public:
 
     //! Return the base name of the file without relative path.
     char const* BaseName() const;
+
+    //! Return the file contents hash (using MD5).
+    MD5_HASH const& Hash() const;
 
     //! Return the locale flags (WoW only).
     DWORD Locale() const;
