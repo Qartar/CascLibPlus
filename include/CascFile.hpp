@@ -10,7 +10,10 @@ class CascIterator;
 
 ////////////////////////////////////////////////////////////////////////////////
 /**
- *
+ * Encapsulates both the `CASC_FIND_DATA` data structure and the corresponding
+ * file handle. `CascFile` objects are obtained through explicit open methods
+ * on `CascStorage` (i.e. `OpenFileByKey`, `OpenFileByEncoding`, `OpenFile`) or
+ * via the iterator helpers, `CascIterator` and `CascRange`.
  */
 class CascFile
 {
@@ -34,7 +37,7 @@ public:
     //! Return the base name of the file without relative path.
     char const* BaseName() const;
 
-    //! Return the file contents hash (using MD5).
+    //! Return the 128-bit MD5 hash of the file contents.
     MD5_HASH const& Hash() const;
 
     //! Return the locale flags (WoW only).

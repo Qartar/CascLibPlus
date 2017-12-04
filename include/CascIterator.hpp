@@ -19,7 +19,9 @@ class CascFindFiles;
 
 ////////////////////////////////////////////////////////////////////////////////
 /**
- *
+ * Enables iteration over files in the `CascStorage` object using C++11's
+ * ranged-based for loop syntax. You should not need to manipulate this class
+ * directly.
  */
 class CascIterator
 {
@@ -49,7 +51,9 @@ protected:
 
 ////////////////////////////////////////////////////////////////////////////////
 /**
- *
+ * Enables iteration over files in the `CascStorage` object using C++11's
+ * ranged-based for loop syntax. You should not need to manipulate this class
+ * directly.
  */
 class CascFindFiles
 {
