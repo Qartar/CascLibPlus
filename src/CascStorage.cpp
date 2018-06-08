@@ -25,10 +25,10 @@ bool CascStorage::GetStorageInfo(CASC_STORAGE_INFO_CLASS InfoClass, void* pvStor
 }
 
 //------------------------------------------------------------------------------
-CascFile CascStorage::OpenFileByIndexKey(PQUERY_KEY pIndexKey, DWORD dwFlags)
+CascFile CascStorage::OpenFileByEKey(PQUERY_KEY pCKey, PQUERY_KEY pEKey, DWORD dwEncodedSize)
 {
     HANDLE hFile;
-    if (CascOpenFileByIndexKey(_storage, pIndexKey, dwFlags, &hFile)) {
+    if (CascOpenFileByEKey(_storage, pCKey, pEKey, dwEncodedSize, &hFile)) {
         return CascFile(hFile);
     } else {
         return CascFile(NULL);
@@ -36,10 +36,10 @@ CascFile CascStorage::OpenFileByIndexKey(PQUERY_KEY pIndexKey, DWORD dwFlags)
 }
 
 //------------------------------------------------------------------------------
-CascFile CascStorage::OpenFileByEncodingKey(PQUERY_KEY pEncodingKey, DWORD dwFlags)
+CascFile CascStorage::OpenFileByCKey(PQUERY_KEY pCKey)
 {
     HANDLE hFile;
-    if (CascOpenFileByEncodingKey(_storage, pEncodingKey, dwFlags, &hFile)) {
+    if (CascOpenFileByCKey(_storage, pCKey, &hFile)) {
         return CascFile(hFile);
     } else {
         return CascFile(NULL);

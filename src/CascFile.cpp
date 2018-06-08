@@ -45,13 +45,13 @@ CascFile::CascFile(HANDLE hStorage, CASC_FIND_DATA const& Data)
     : _file(NULL)
     , _data(Data)
 {
-    BYTE EncodingKey[MD5_HASH_SIZE];
+    BYTE FileKey[MD5_HASH_SIZE];
 
-    memcpy(EncodingKey, Data.EncodingKey, MD5_HASH_SIZE);
+    memcpy(FileKey, Data.FileKey, MD5_HASH_SIZE);
 
-    QUERY_KEY QueryKey{EncodingKey, MD5_HASH_SIZE};
+    QUERY_KEY QueryKey{FileKey, MD5_HASH_SIZE};
 
-    CascOpenFileByEncodingKey(hStorage, &QueryKey, 0, &_file);
+    CascOpenFileByCKey(hStorage, &QueryKey, &_file);
 }
 
 //------------------------------------------------------------------------------
@@ -91,7 +91,7 @@ char const* CascFile::BaseName() const
 CascFile::MD5_HASH const& CascFile::Hash() const
 {
     if (_file) {
-        return _data.EncodingKey;
+        return _data.FileKey;
     } else {
         return DefaultEncodingKey;
     }

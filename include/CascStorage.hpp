@@ -19,8 +19,8 @@ public:
 
     bool GetStorageInfo(CASC_STORAGE_INFO_CLASS InfoClass, void* pvStorageInfo, size_t cbStorageInfo, size_t* pcbLengthNeeded);
 
-    CascFile OpenFileByIndexKey(PQUERY_KEY pIndexKey, DWORD dwFlags);
-    CascFile OpenFileByEncodingKey(PQUERY_KEY pEncodingKey, DWORD dwFlags);
+    CascFile OpenFileByEKey(PQUERY_KEY pCKey, PQUERY_KEY pEKey, DWORD dwEncodedSize);
+    CascFile OpenFileByCKey(PQUERY_KEY pCKey);
     CascFile OpenFile(char const* szFileName, DWORD dwLocale, DWORD dwFlags);
 
     DWORD GetFileId(char const* szFileName);
