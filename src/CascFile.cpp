@@ -122,3 +122,9 @@ ULONGLONG CascFile::ActualSize() const
     DWORD LowPart = CascGetFileSize(_file, &HighPart);
     return (static_cast<ULONGLONG>(HighPart) << 32) | LowPart;
 }
+
+//------------------------------------------------------------------------------
+DWORD CascFile::OpenFlags() const
+{
+    return _file ? _data.dwOpenFlags : 0;
+}

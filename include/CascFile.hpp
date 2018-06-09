@@ -52,6 +52,9 @@ public:
     //! Return the uncompressed size of the file.
     ULONGLONG ActualSize() const;
 
+    //! Return the open flags, i.e. whether the file was opened by name or by key.
+    DWORD OpenFlags() const;
+
 protected:
     HANDLE _file;
 
