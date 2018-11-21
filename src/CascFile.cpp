@@ -51,7 +51,7 @@ CascFile::CascFile(HANDLE hStorage, CASC_FIND_DATA const& Data)
 
     QUERY_KEY QueryKey{FileKey, MD5_HASH_SIZE};
 
-    CascOpenFileByCKey(hStorage, &QueryKey, &_file);
+    CascOpenFileByCKey(hStorage, &QueryKey, 0, &_file);
 }
 
 //------------------------------------------------------------------------------
