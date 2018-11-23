@@ -25,6 +25,12 @@ bool CascStorage::GetStorageInfo(CASC_STORAGE_INFO_CLASS InfoClass, void* pvStor
 }
 
 //------------------------------------------------------------------------------
+bool CascStorage::AddEncryptionKey(ULONGLONG KeyName, LPBYTE Key)
+{
+    return CascAddEncryptionKey(_storage, KeyName, Key);
+}
+
+//------------------------------------------------------------------------------
 CascFile CascStorage::OpenFileByEKey(PQUERY_KEY pCKey, PQUERY_KEY pEKey, DWORD dwEncodedSize)
 {
     HANDLE hFile;
