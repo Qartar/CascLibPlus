@@ -20,8 +20,8 @@ public:
     bool GetStorageInfo(CASC_STORAGE_INFO_CLASS InfoClass, void* pvStorageInfo, size_t cbStorageInfo, size_t* pcbLengthNeeded);
     bool AddEncryptionKey(ULONGLONG KeyName, LPBYTE Key);
 
-    CascFile OpenFileByEKey(PQUERY_KEY pCKey, PQUERY_KEY pEKey, DWORD dwEncodedSize);
-    CascFile OpenFileByCKey(PQUERY_KEY pCKey);
+    CascFile OpenFileByEKey(PQUERY_KEY pCKey, PQUERY_KEY pEKey, DWORD dwOpenFlags, DWORD dwEncodedSize);
+    CascFile OpenFileByCKey(PQUERY_KEY pCKey, DWORD dwOpenFlags);
     CascFile OpenFile(char const* szFileName, DWORD dwLocale, DWORD dwFlags);
 
     DWORD GetFileId(char const* szFileName);

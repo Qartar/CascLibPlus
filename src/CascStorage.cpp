@@ -31,10 +31,10 @@ bool CascStorage::AddEncryptionKey(ULONGLONG KeyName, LPBYTE Key)
 }
 
 //------------------------------------------------------------------------------
-CascFile CascStorage::OpenFileByEKey(PQUERY_KEY pCKey, PQUERY_KEY pEKey, DWORD dwEncodedSize)
+CascFile CascStorage::OpenFileByEKey(PQUERY_KEY pCKey, PQUERY_KEY pEKey, DWORD dwOpenFlags, DWORD dwEncodedSize)
 {
     HANDLE hFile;
-    if (CascOpenFileByEKey(_storage, pCKey, pEKey, 0, dwEncodedSize, &hFile)) {
+    if (CascOpenFileByEKey(_storage, pCKey, pEKey, dwOpenFlags, dwEncodedSize, &hFile)) {
         return CascFile(hFile);
     } else {
         return CascFile(NULL);
@@ -42,10 +42,10 @@ CascFile CascStorage::OpenFileByEKey(PQUERY_KEY pCKey, PQUERY_KEY pEKey, DWORD d
 }
 
 //------------------------------------------------------------------------------
-CascFile CascStorage::OpenFileByCKey(PQUERY_KEY pCKey)
+CascFile CascStorage::OpenFileByCKey(PQUERY_KEY pCKey, DWORD dwOpenFlags)
 {
     HANDLE hFile;
-    if (CascOpenFileByCKey(_storage, pCKey, 0, &hFile)) {
+    if (CascOpenFileByCKey(_storage, pCKey, dwOpenFlags, &hFile)) {
         return CascFile(hFile);
     } else {
         return CascFile(NULL);
